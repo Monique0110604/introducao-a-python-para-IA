@@ -47,7 +47,10 @@ Compreender os fundamentos de Machine Learning e Deep Learning, desenvolvendo mo
 
 # 📚 Aula 02 – Conhecendo e Explorando Dados com Pandas
 
+🔗 Acesse: **[Aula 02](https://colab.research.google.com/drive/1H-VqxYlJJQ69EN0UX3FjSYkuOIie1LbR?usp=sharing)**
+
 ## Conteúdo
+
 
 * Introdução ao Pandas
 * Dicionários
