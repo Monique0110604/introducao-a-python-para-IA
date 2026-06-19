@@ -1,200 +1,587 @@
-# Aula 01 — Introdução ao Machine Learning
-**Duração: 4h | Modalidade: Expositiva + Prática (Google Colab)**
+# Aula 01 – Introdução ao Machine Learning (ML)
+
+**Carga horária:** 4 horas
+**Público-alvo:** Iniciantes em Machine Learning
+**Pré-requisitos:** Lógica de programação e Python básico
 
 ---
 
-## Bloco 1 — O que é Machine Learning 
+# Objetivos da Aula
 
-**Definição:** ML é a área da computação em que o sistema aprende padrões a partir de dados, em vez de seguir regras explicitamente programadas.
+Ao final desta aula, você será capaz de:
 
-**ML vs. programação tradicional**
+✅ Entender o que é Machine Learning.
 
-| Programação tradicional | Machine Learning |
-|---|---|
-| Regras + Dados → Resultado | Dados + Resultado → Regras |
-| Programador escreve a lógica | Algoritmo descobre a lógica |
+✅ Diferenciar programação tradicional de Machine Learning.
 
-**Analogia central:** Ensinar uma criança a reconhecer cachorros.
-- *Abordagem tradicional:* você lista regras ("tem 4 patas, late, tem rabo"). Mas e um cachorro de 3 patas? E um lobo, que também late?
-- *Abordagem ML:* você mostra centenas de fotos de cachorros (e de "não-cachorros") e deixa a criança (o modelo) descobrir sozinha os padrões que distinguem um cachorro.
+✅ Conhecer os principais tipos de aprendizado.
 
-**Outro exemplo prático:** Filtro de spam.
-- Tradicional: programador escreve regra fixa "se contém a palavra 'grátis', é spam" — fácil de burlar.
-- ML: o sistema aprende, a partir de milhares de e-mails já classificados, quais combinações de padrões indicam spam — e se adapta a novos truques.
+✅ Entender o conceito de treinamento e previsão.
 
-**Discussão em sala:** Dê exemplos do cotidiano onde "regras fixas" falhariam e ML seria mais adequado.
+✅ Criar seu primeiro modelo utilizando Scikit-Learn.
 
 ---
 
-## Bloco 2 — Tipos de Aprendizado 
+# 1. O que é Machine Learning?
 
-### 1. Aprendizado Supervisionado 
-O modelo aprende com exemplos rotulados (entrada + resposta correta).
+Machine Learning (Aprendizado de Máquina) é uma área da Inteligência Artificial que permite que computadores aprendam padrões a partir dos dados sem serem explicitamente programados para cada situação.
 
-**Analogia:** Um aluno estudando com um gabarito ao lado — vê a pergunta, tenta responder, confere com a resposta certa e ajusta seu raciocínio.
+## Analogia
 
-- **Regressão:** prever um valor numérico (ex: preço de uma casa).
-- **Classificação:** prever uma categoria (ex: e-mail é spam ou não).
+Imagine uma criança aprendendo a identificar cachorros.
 
-### 2. Aprendizado Não Supervisionado 
-O modelo recebe dados **sem rótulos** e precisa encontrar padrões ou agrupamentos por conta própria.
+Você não entrega uma lista enorme de regras:
 
-**Analogia:** Organizar uma caixa de botões misturados sem instruções — você naturalmente os agrupa por cor, tamanho ou formato, mesmo sem alguém dizer como.
+❌ Tem 4 patas
 
-- **Clustering:** agrupar elementos semelhantes (ex: segmentação de clientes).
-- **Redução de dimensionalidade:** simplificar dados complexos mantendo o essencial.
+❌ Tem rabo
 
-### 3. Aprendizado por Reforço 
-O modelo aprende por tentativa e erro, recebendo recompensas ou punições conforme suas ações.
+❌ Late
 
-**Analogia:** Treinar um cachorro com petiscos — ele não recebe um manual, mas aprende por repetição quais ações geram recompensa.
+Porque existem exceções.
+
+Em vez disso, você mostra centenas de fotos:
+
+🐶 Cachorro
+
+🐶 Cachorro
+
+🐶 Cachorro
+
+A criança começa a identificar padrões.
+
+Machine Learning funciona da mesma forma.
 
 ---
 
-## Bloco 3 — Ciclo de Vida de um Projeto de ML 
+# 2. Programação Tradicional x Machine Learning
 
+## Programação Tradicional
+
+### Entrada
+
+* Dados
+* Regras
+
+### Resultado
+
+* Resposta
+
+Exemplo:
+
+```python
+idade = 20
+
+if idade >= 18:
+    print("Maior de idade")
+else:
+    print("Menor de idade")
 ```
-1. Definição do problema
-2. Coleta de dados
-3. Preparação/limpeza dos dados
-4. Divisão treino/teste
-5. Treinamento do modelo
-6. Avaliação do modelo
-7. Ajustes (voltar a 3, 5 ou 6, se necessário)
-8. Implantação (deploy) e monitoramento
+
+O programador escreveu as regras.
+
+---
+
+## Machine Learning
+
+### Entrada
+
+* Dados
+* Respostas corretas
+
+### Resultado
+
+* Regras aprendidas
+
+Exemplo:
+
+| Idade | Comprou |
+| ----- | ------- |
+| 18    | Sim     |
+| 20    | Sim     |
+| 15    | Não     |
+| 16    | Não     |
+
+O algoritmo encontra sozinho os padrões.
+
+---
+
+# 3. Onde usamos Machine Learning?
+
+Machine Learning está presente diariamente:
+
+### Netflix
+
+Sugestão de filmes.
+
+### Spotify
+
+Sugestão de músicas.
+
+### Instagram
+
+Conteúdo recomendado.
+
+### YouTube
+
+Vídeos sugeridos.
+
+### Gmail
+
+Filtro de spam.
+
+### Bancos
+
+Detecção de fraudes.
+
+### Medicina
+
+Auxílio em diagnósticos.
+
+---
+
+# 4. Principais Tipos de Aprendizado
+
+## Aprendizado Supervisionado
+
+Possui respostas corretas.
+
+### Exemplo
+
+Queremos prever:
+
+* Compra ou não compra.
+* Aprova ou reprova.
+* Tem doença ou não.
+
+Dados:
+
+| Idade | Comprou |
+| ----- | ------- |
+| 20    | Sim     |
+| 30    | Sim     |
+| 15    | Não     |
+
+A coluna "Comprou" é a resposta.
+
+---
+
+## Aprendizado Não Supervisionado
+
+Não possui resposta.
+
+O computador tenta encontrar grupos.
+
+### Exemplo
+
+Clientes de uma loja.
+
+O algoritmo pode descobrir:
+
+Grupo A → Jovens
+
+Grupo B → Adultos
+
+Grupo C → Idosos
+
+Sem ninguém informar isso.
+
+---
+
+## Aprendizado por Reforço
+
+Aprende através de recompensas.
+
+### Exemplo
+
+Jogos.
+
+O sistema recebe pontos quando toma boas decisões.
+
+Foi assim que várias IAs aprenderam a jogar:
+
+* Xadrez
+* Go
+* Atari
+
+---
+
+# 5. Como o Computador Aprende?
+
+Imagine que queremos prever se uma pessoa fará uma compra.
+
+Dados:
+
+| Idade | Salário | Comprou |
+| ----- | ------- | ------- |
+| 18    | 2000    | Não     |
+| 25    | 4000    | Sim     |
+| 35    | 6000    | Sim     |
+| 20    | 1800    | Não     |
+
+---
+
+## Etapa 1
+
+Fornecemos os dados.
+
+---
+
+## Etapa 2
+
+O algoritmo procura padrões.
+
+Exemplo:
+
+"Pessoas com salários maiores tendem a comprar."
+
+---
+
+## Etapa 3
+
+O modelo aprende.
+
+---
+
+## Etapa 4
+
+Recebe novos dados.
+
+| Idade | Salário |
+| ----- | ------- |
+| 30    | 5000    |
+
+---
+
+## Etapa 5
+
+Realiza uma previsão.
+
+Resultado:
+
+```text
+Provavelmente comprará.
 ```
 
-**Analogia:** É como o ciclo de aprovação de um prato novo em um restaurante — definir o prato (problema), comprar ingredientes (dados), preparar (limpeza), testar em um grupo pequeno (treino/teste), servir (deploy) e ajustar a receita conforme o feedback.
+---
 
-> As etapas 2 e 3 consomem ~70-80% do tempo real de um projeto de ML.
+# 6. Conceitos Fundamentais
+
+## Dataset
+
+Conjunto de dados utilizado para treinar o modelo.
+
+Exemplo:
+
+| Idade | Salário | Comprou |
+| ----- | ------- | ------- |
+| 20    | 2000    | Não     |
+| 30    | 5000    | Sim     |
 
 ---
 
-## Bloco 4 — Casos de Uso Reais 
+## Features
 
-| Aplicação | Tipo de aprendizado | Exemplo |
-|---|---|---|
-| Recomendação de produtos | Supervisionado/Não supervisionado | Netflix, Spotify |
-| Detecção de fraude | Supervisionado | Cartões de crédito |
-| Visão computacional | Supervisionado | Diagnóstico por imagem |
-| Segmentação de clientes | Não supervisionado | Marketing |
-| Carros autônomos | Reforço | Navegação |
+Características utilizadas para prever.
+
+Neste caso:
+
+```text
+Idade
+Salário
+```
 
 ---
 
-## Bloco 5 — Prática no Google Colab 
+## Target
 
-### Passo 1 — Configuração do ambiente 
+Resposta desejada.
+
+```text
+Comprou
+```
+
+---
+
+# 7. Conhecendo o Scikit-Learn
+
+É a principal biblioteca de Machine Learning em Python.
+
+Instalação:
+
+```python
+pip install scikit-learn
+```
+
+Importação:
+
+```python
+from sklearn.tree import DecisionTreeClassifier
+```
+
+---
+
+# 8. Nosso Primeiro Modelo
+
+## Passo 1 – Criar os dados
 
 ```python
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 
-print("Ambiente pronto!")
+dados = {
+    "idade": [18, 22, 25, 30, 35, 40],
+    "salario": [1500, 2500, 3000, 4500, 5000, 6000],
+    "comprou": [0, 0, 1, 1, 1, 1]
+}
+
+df = pd.DataFrame(dados)
+
+print(df)
 ```
-
-**Explicando linha por linha:**
-- `import pandas as pd` → importa a biblioteca **pandas**, usada para trabalhar com tabelas de dados (chamadas de *DataFrames*). O `as pd` é um "apelido" — em vez de escrever `pandas.algumacoisa()` toda vez, escrevemos `pd.algumacoisa()`. É uma convenção que todo mundo usa, então os alunos vão encontrar esse padrão em qualquer material de ML.
-- `import matplotlib.pyplot as plt` → importa o módulo de gráficos do **matplotlib**, apelidado de `plt`. É a biblioteca base de visualização em Python.
-- `import seaborn as sns` → importa o **seaborn**, uma biblioteca construída em cima do matplotlib que facilita gráficos estatísticos mais bonitos com menos código. Apelido `sns` é convenção (vem do nome de uma personagem da série *The West Wing*, curiosidade besteira que pode descontrair a aula).
-- `print("Ambiente pronto!")` → apenas confirma visualmente que as células rodaram sem erro. Não tem função técnica, é só feedback para o aluno.
-
-> Não precisamos instalar nada (`!pip install`) porque essas três bibliotecas já vêm pré-instaladas no Google Colab.
 
 ---
 
-### Passo 2 — Carregar e explorar o dataset
+## Passo 2 – Separar entradas e saídas
 
 ```python
-from sklearn.datasets import load_iris
+X = df[["idade", "salario"]]
 
-iris = load_iris(as_frame=True)
-df = iris.frame
-
-df.head()
+y = df["comprou"]
 ```
 
-**Explicando linha por linha:**
-- `from sklearn.datasets import load_iris` → o scikit-learn (`sklearn`) traz alguns datasets clássicos já embutidos, prontos para uso didático. Aqui importamos a função `load_iris`, que carrega o famoso dataset **Iris** (150 flores, 3 espécies, 4 medidas por flor).
-- `iris = load_iris(as_frame=True)` → executa a função e guarda o resultado na variável `iris`. O parâmetro `as_frame=True` diz "me devolva os dados já organizados como uma tabela pandas (DataFrame)", em vez do formato bruto (array NumPy), que é mais difícil de visualizar para iniciantes.
-- `df = iris.frame` → o objeto `iris` carregado guarda várias informações (dados, descrição, nomes das colunas...). `.frame` é especificamente a tabela de dados pronta. Guardamos essa tabela na variável `df` (abreviação comum de *DataFrame*).
-- `df.head()` → método do pandas que mostra **as primeiras 5 linhas** da tabela. É o primeiro comando que qualquer pessoa roda ao abrir um dataset novo — serve para "dar uma espiada" na estrutura dos dados sem imprimir a tabela inteira.
+### Explicação
+
+X representa as informações usadas para prever.
 
 ```python
-df.info()
-df.describe()
+idade
+salario
 ```
 
-**Explicando linha por linha:**
-- `df.info()` → mostra um resumo técnico da tabela: quantas linhas e colunas existem, o tipo de dado de cada coluna (número inteiro, decimal, texto...) e se há valores faltantes. É o comando para entender "do que essa tabela é feita".
-- `df.describe()` → gera estatísticas resumidas de cada coluna numérica: média, desvio padrão, valor mínimo, valor máximo e os quartis (25%, 50%, 75%). Serve para ter uma primeira noção da distribuição dos dados, sem precisar olhar linha por linha.
-
-**Discussão guiada:** O que são as colunas? O que representa a coluna `target`? Quantas espécies existem?
-
----
-
-### Passo 3 — Visualização exploratória 
+y representa a resposta.
 
 ```python
-df['target'].value_counts()
+comprou
 ```
 
-**Explicando:**
-- `df['target']` → seleciona apenas a coluna chamada `target` da tabela (a coluna que indica a espécie da flor, codificada como 0, 1 ou 2).
-- `.value_counts()` → método que conta quantas vezes cada valor aparece nessa coluna. Aqui, vai mostrar quantas flores existem de cada espécie — útil para verificar se o dataset está **balanceado** (quantidade parecida entre as classes) ou **desbalanceado**.
+---
+
+## Passo 3 – Criar o modelo
 
 ```python
-sns.scatterplot(data=df, x='petal length (cm)', y='petal width (cm)', hue='target', palette='deep')
-plt.title('Distribuição das espécies por características da pétala')
-plt.show()
+from sklearn.tree import DecisionTreeClassifier
+
+modelo = DecisionTreeClassifier()
 ```
 
-**Explicando linha por linha:**
-- `sns.scatterplot(...)` → cria um **gráfico de dispersão** (cada ponto = uma flor), usando o seaborn.
-  - `data=df` → diz qual tabela usar como fonte dos dados.
-  - `x='petal length (cm)'` → define o eixo horizontal (comprimento da pétala).
-  - `y='petal width (cm)'` → define o eixo vertical (largura da pétala).
-  - `hue='target'` → colore os pontos de acordo com a espécie (essa é a parte mais importante: permite ver visualmente se as espécies se separam naturalmente no gráfico).
-  - `palette='deep'` → define o conjunto de cores usado (é só uma escolha estética/paleta pronta do seaborn).
-- `plt.title('...')` → adiciona um título ao gráfico, usando o matplotlib (o seaborn é construído sobre ele, então comandos do `plt` continuam funcionando).
-- `plt.show()` → renderiza o gráfico na tela. Sem esse comando, em alguns ambientes o gráfico pode não aparecer.
+### O que é isso?
 
-**Pergunta para os alunos:** Observando o gráfico, vocês conseguem imaginar uma "régua" (linha) que separe as espécies? *(Gancho para a Aula 4 — Regressão Linear, e Aula 5 — Classificação)*
+Estamos criando uma Árvore de Decisão.
 
----
+Ela aprende fazendo perguntas:
 
-### Passo 4 — Fechamento da prática 
-Ainda não treinamos nenhum modelo — só **exploramos** os dados (etapas 2-3 do ciclo de vida visto no Bloco 4).
+```text
+Salário > 3000?
+      |
+      Sim
+      |
+Comprou
+```
 
 ---
 
-## Bloco 7 — Encerramento 
-- Quais são os 3 tipos de aprendizado e o ciclo de vida?
-- Apresentar a lista de exercícios (tarefa para casa).
-- Prévia da Aula 2: matemática essencial (vetores, distâncias, médias).
+## Passo 4 – Treinar
+
+```python
+modelo.fit(X, y)
+```
+
+### Analogia
+
+Imagine um professor mostrando exercícios resolvidos para um aluno.
+
+O aluno estuda os exemplos.
+
+O método:
+
+```python
+fit()
+```
+
+faz exatamente isso.
 
 ---
 
-## Lista de Exercícios — Aula 01
+## Passo 5 – Fazer previsão
 
-**Parte A — Conceitual**
-1. Explique, com suas palavras, a diferença entre programação tradicional e Machine Learning.
-2. Dê um exemplo do seu cotidiano que poderia ser resolvido com ML. Justifique por que regras fixas não seriam suficientes.
-3. Classifique cada cenário como supervisionado, não supervisionado ou por reforço, justificando:
-   a) Prever se um aluno vai ou não ser aprovado, com base no histórico de notas de alunos anteriores.
-   b) Agrupar clientes de um e-commerce em perfis de compra, sem informação prévia sobre esses perfis.
-   c) Um robô aprendendo a andar, recebendo "pontos" quando avança e "penalidades" quando cai.
-4. Por que a etapa de preparação de dados costuma consumir mais tempo que o treinamento do modelo?
-5. Cite dois riscos éticos possíveis no uso de ML em decisões que afetam pessoas.
+```python
+nova_pessoa = [[28, 3500]]
 
-**Parte B — Prática (Google Colab)**
-6. Usando o dataset Iris, calcule a média e o desvio padrão de cada característica para cada espécie separadamente. *(Dica: `df.groupby('target').describe()`)*
-7. Crie um gráfico de dispersão usando `sepal length` e `sepal width` em vez de pétala. As espécies ficam tão bem separadas? Comente.
-8. Carregue outro dataset do scikit-learn (`load_wine()` ou `load_breast_cancer()`), repita `head()`, `info()`, `describe()` e escreva 3 observações.
+resultado = modelo.predict(nova_pessoa)
 
-**Parte C — Reflexão**
-9. Escolha um app do dia a dia e identifique duas funcionalidades que provavelmente usam ML. Que tipo de aprendizado cada uma usa?
+print(resultado)
+```
+
+Saída:
+
+```text
+[1]
+```
 
 ---
 
+## Interpretando
+
+```python
+if resultado[0] == 1:
+    print("Comprará")
+else:
+    print("Não comprará")
+```
+
+---
+
+# 9. Fluxo Completo do Machine Learning
+
+```text
+Coleta dos Dados
+        ↓
+Limpeza dos Dados
+        ↓
+Treinamento
+        ↓
+Avaliação
+        ↓
+Previsão
+        ↓
+Melhoria do Modelo
+```
+
+---
+
+# 10. Atividade Prática
+
+Crie um modelo para prever aprovação.
+
+Dados:
+
+| Horas Estudo | Aprovado |
+| ------------ | -------- |
+| 1            | 0        |
+| 2            | 0        |
+| 3            | 0        |
+| 4            | 1        |
+| 5            | 1        |
+| 6            | 1        |
+
+Pergunta:
+
+Uma pessoa que estudou 5 horas será aprovada?
+
+---
+
+# Exercícios
+
+## Exercício 1
+
+Explique com suas palavras:
+
+* O que é Machine Learning?
+
+---
+
+## Exercício 2
+
+Qual a diferença entre:
+
+* Programação tradicional
+* Machine Learning
+
+---
+
+## Exercício 3
+
+Classifique:
+
+a) Detecção de spam
+
+b) Recomendação de filmes
+
+c) Agrupamento de clientes
+
+Como:
+
+* Supervisionado
+* Não supervisionado
+
+---
+
+## Exercício 4
+
+Identifique:
+
+| Idade | Salário | Comprou |
+| ----- | ------- | ------- |
+| 25    | 3000    | Sim     |
+
+Quais são:
+
+* Features?
+* Target?
+
+---
+
+## Exercício 5
+
+Complete:
+
+```python
+from sklearn.tree import __________
+
+modelo = __________()
+
+modelo.fit(X, y)
+```
+
+---
+
+# Desafio da Aula
+
+Crie um modelo para prever se um aluno será aprovado utilizando:
+
+* Nota 1
+* Nota 2
+
+Como entrada.
+
+E:
+
+* Aprovado (0 ou 1)
+
+Como saída.
+
+---
+
+# Resumo
+
+Nesta aula aprendemos:
+
+✅ O que é Machine Learning
+
+✅ Diferença entre programação e ML
+
+✅ Tipos de aprendizado
+
+✅ Dataset, Features e Target
+
+✅ Biblioteca Scikit-Learn
+
+✅ Árvore de Decisão
+
+✅ Método `fit()`
+
+✅ Método `predict()`
+
+✅ Primeiro modelo de Machine Learning
+
+Na próxima aula, o foco será **NumPy e Pandas para preparação de dados**, etapa essencial para qualquer projeto de Machine Learning.
