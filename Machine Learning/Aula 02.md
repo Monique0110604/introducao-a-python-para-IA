@@ -472,7 +472,18 @@ df = pd.read_csv("alunos.csv")
 
 print(df)
 ```
+## Em Caso de erro
+```python
+import pandas as pd
 
+df = pd.read_csv(
+    "arquivo.csv",
+    sep=";",
+    encoding="latin1"
+)
+
+print(df)
+```
 ---
 
 # Verificando se o arquivo foi carregado
