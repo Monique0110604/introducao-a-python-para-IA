@@ -1,58 +1,53 @@
-# Aula 01 – Introdução ao Machine Learning (ML)
+# Aula 01 – Introdução ao Machine Learning com Python, Pandas e Scikit-Learn
 
-**Carga horária:** 4 horas
+## Objetivos da Aula
 
-**Público-alvo:** Iniciantes em Machine Learning
+Ao final desta aula você será capaz de:
 
-**Pré-requisitos:** Lógica de programação e Python básico
-
----
-
-# Objetivos da Aula
-
-Ao final desta aula, você será capaz de:
-
-✅ Entender o que é Machine Learning.
-
-✅ Diferenciar programação tradicional de Machine Learning.
-
-✅ Conhecer os principais tipos de aprendizado.
-
-✅ Entender o conceito de treinamento e previsão.
-
-✅ Criar seu primeiro modelo utilizando Scikit-Learn.
+* Entender o que é Machine Learning.
+* Compreender como um computador aprende com dados.
+* Conhecer o papel do Pandas em projetos de IA.
+* Entender cada instrução utilizada no código.
+* Criar seu primeiro modelo de Machine Learning.
+* Realizar previsões com novos dados.
 
 ---
 
 # 1. O que é Machine Learning?
 
-Machine Learning (Aprendizado de Máquina) é uma área da Inteligência Artificial que permite que computadores aprendam padrões a partir dos dados sem serem explicitamente programados para cada situação.
+Machine Learning (Aprendizado de Máquina) é uma área da Inteligência Artificial que permite que computadores aprendam padrões a partir de exemplos.
 
-## Analogia
+## Analogia: Como uma criança aprende?
 
-Imagine uma criança aprendendo a identificar cachorros.
+Imagine que você queira ensinar uma criança a reconhecer cachorros.
 
-Você não entrega uma lista enorme de regras:
+Você não entrega uma apostila com milhares de regras:
 
-❌ Tem 4 patas
+❌ Tem quatro patas.
 
-❌ Tem rabo
+❌ Tem pelo.
 
-❌ Late
+❌ Tem focinho.
 
-Porque existem exceções.
+Porque um cachorro pode ser pequeno, grande, peludo ou não.
 
-Em vez disso, você mostra centenas de fotos:
+O que normalmente fazemos?
+
+Mostramos vários exemplos:
+
+🐶 Cachorro
 
 🐶 Cachorro
 
 🐶 Cachorro
 
-🐶 Cachorro
+🐱 Gato
 
-A criança começa a identificar padrões.
+🐱 Gato
 
-Machine Learning funciona da mesma forma.
+A criança começa a perceber padrões.
+
+O computador aprende exatamente assim.
 
 ---
 
@@ -60,16 +55,9 @@ Machine Learning funciona da mesma forma.
 
 ## Programação Tradicional
 
-### Entrada
+O programador cria todas as regras.
 
-* Dados
-* Regras
-
-### Resultado
-
-* Resposta
-
-Exemplo:
+### Exemplo
 
 ```python
 idade = 20
@@ -80,260 +68,139 @@ else:
     print("Menor de idade")
 ```
 
-O programador escreveu as regras.
+### Como funciona?
+
+```text
+Dados + Regras = Resultado
+```
+
+O computador não aprende nada.
+
+Ele apenas segue instruções.
 
 ---
 
 ## Machine Learning
 
-### Entrada
+No Machine Learning fornecemos:
 
-* Dados
-* Respostas corretas
-
-### Resultado
-
-* Regras aprendidas
+```text
+Dados + Respostas = Aprendizado
+```
 
 Exemplo:
 
 | Idade | Comprou |
 | ----- | ------- |
-| 18    | Sim     |
-| 20    | Sim     |
-| 15    | Não     |
-| 16    | Não     |
+| 18    | Não     |
+| 22    | Não     |
+| 35    | Sim     |
+| 40    | Sim     |
 
-O algoritmo encontra sozinho os padrões.
-
----
-
-# 3. Onde usamos Machine Learning?
-
-Machine Learning está presente diariamente:
-
-### Netflix
-
-Sugestão de filmes.
-
-### Spotify
-
-Sugestão de músicas.
-
-### Instagram
-
-Conteúdo recomendado.
-
-### YouTube
-
-Vídeos sugeridos.
-
-### Gmail
-
-Filtro de spam.
-
-### Bancos
-
-Detecção de fraudes.
-
-### Medicina
-
-Auxílio em diagnósticos.
+O algoritmo encontra padrões sozinho.
 
 ---
 
-# 4. Principais Tipos de Aprendizado
+# 3. O que é um Dataset?
 
-## Aprendizado Supervisionado
+Dataset é um conjunto de dados.
 
-Possui respostas corretas.
-
-### Exemplo
-
-Queremos prever:
-
-* Compra ou não compra.
-* Aprova ou reprova.
-* Tem doença ou não.
-
-Dados:
-
-| Idade | Comprou |
-| ----- | ------- |
-| 20    | Sim     |
-| 30    | Sim     |
-| 15    | Não     |
-
-A coluna "Comprou" é a resposta.
-
----
-
-## Aprendizado Não Supervisionado
-
-Não possui resposta.
-
-O computador tenta encontrar grupos.
-
-### Exemplo
-
-Clientes de uma loja.
-
-O algoritmo pode descobrir:
-
-Grupo A → Jovens
-
-Grupo B → Adultos
-
-Grupo C → Idosos
-
-Sem ninguém informar isso.
-
----
-
-## Aprendizado por Reforço
-
-Aprende através de recompensas.
-
-### Exemplo
-
-Jogos.
-
-O sistema recebe pontos quando toma boas decisões.
-
-Foi assim que várias IAs aprenderam a jogar:
-
-* Xadrez
-* Go
-* Atari
-
----
-
-# 5. Como o Computador Aprende?
-
-Imagine que queremos prever se uma pessoa fará uma compra.
-
-Dados:
+Imagine uma planilha do Excel.
 
 | Idade | Salário | Comprou |
 | ----- | ------- | ------- |
-| 18    | 2000    | Não     |
-| 25    | 4000    | Sim     |
-| 35    | 6000    | Sim     |
-| 20    | 1800    | Não     |
+| 18    | 1500    | 0       |
+| 25    | 3000    | 1       |
+| 40    | 5000    | 1       |
+
+Cada linha representa uma pessoa.
+
+Cada coluna representa uma informação.
 
 ---
 
-## Etapa 1
+# 4. Conhecendo o Pandas
 
-Fornecemos os dados.
+O Pandas é uma biblioteca Python utilizada para trabalhar com dados.
 
----
+Praticamente todo projeto de Machine Learning utiliza Pandas.
 
-## Etapa 2
+## Analogia
 
-O algoritmo procura padrões.
+Imagine que você recebeu uma planilha com 100 mil linhas.
 
-Exemplo:
+Fazer isso manualmente seria impossível.
 
-"Pessoas com salários maiores tendem a comprar."
+O Pandas funciona como um super Excel dentro do Python.
 
----
+Ele consegue:
 
-## Etapa 3
+✅ Ler planilhas
 
-O modelo aprende.
+✅ Filtrar dados
 
----
+✅ Organizar dados
 
-## Etapa 4
+✅ Corrigir erros
 
-Recebe novos dados.
+✅ Fazer cálculos
 
-| Idade | Salário |
-| ----- | ------- |
-| 30    | 5000    |
+✅ Preparar os dados para Machine Learning
 
 ---
 
-## Etapa 5
-
-Realiza uma previsão.
-
-Resultado:
-
-```text
-Provavelmente comprará.
-```
-
----
-
-# 6. Conceitos Fundamentais
-
-## Dataset
-
-Conjunto de dados utilizado para treinar o modelo.
-
-Exemplo:
-
-| Idade | Salário | Comprou |
-| ----- | ------- | ------- |
-| 20    | 2000    | Não     |
-| 30    | 5000    | Sim     |
-
----
-
-## Features
-
-Características utilizadas para prever.
-
-Neste caso:
-
-```text
-Idade
-Salário
-```
-
----
-
-## Target
-
-Resposta desejada.
-
-```text
-Comprou
-```
-
----
-
-# 7. Conhecendo o Scikit-Learn
-
-É a principal biblioteca de Machine Learning em Python.
-
-Instalação:
+# 5. Importando o Pandas
 
 ```python
-pip install scikit-learn
+import pandas as pd
 ```
 
-Importação:
+## Explicação
 
-```python
-from sklearn.tree import DecisionTreeClassifier
+### import
+
+Significa:
+
+```text
+Trazer uma biblioteca para o programa.
 ```
 
 ---
 
-# 8. Nosso Primeiro Modelo
+### pandas
 
-## Passo 1 – Criar os dados
+Nome da biblioteca.
+
+---
+
+### as pd
+
+Cria um apelido.
+
+Em vez de escrever:
+
+```python
+pandas.DataFrame()
+```
+
+escrevemos:
+
+```python
+pd.DataFrame()
+```
+
+Muito mais simples.
+
+---
+
+# 6. Criando uma Tabela com Pandas
 
 ```python
 import pandas as pd
 
 dados = {
-    "idade": [18, 22, 25, 30, 35, 40],
-    "salario": [1500, 2500, 3000, 4500, 5000, 6000],
-    "comprou": [0, 0, 1, 1, 1, 1]
+    "idade": [18, 22, 25, 30],
+    "salario": [1500, 2500, 3000, 4500]
 }
 
 df = pd.DataFrame(dados)
@@ -343,84 +210,323 @@ print(df)
 
 ---
 
-## Passo 2 – Separar entradas e saídas
+## Entendendo linha por linha
+
+### Criando um dicionário
 
 ```python
-X = df[["idade", "salario"]]
-
-y = df["comprou"]
+dados = {
+    "idade": [18, 22, 25, 30],
+    "salario": [1500, 2500, 3000, 4500]
+}
 ```
 
-### Explicação
+Estamos criando uma estrutura de dados.
 
-X representa as informações usadas para prever.
+Visualmente:
+
+| idade | salario |
+| ----- | ------- |
+| 18    | 1500    |
+| 22    | 2500    |
+| 25    | 3000    |
+| 30    | 4500    |
+
+---
+
+### DataFrame
+
+```python
+df = pd.DataFrame(dados)
+```
+
+Transforma os dados em tabela.
+
+## O que é DataFrame?
+
+É a estrutura mais importante do Pandas.
+
+Pense nele como uma planilha Excel.
+
+---
+
+### print()
+
+```python
+print(df)
+```
+
+Mostra a tabela na tela.
+
+---
+
+# 7. Acessando Colunas
+
+```python
+print(df["idade"])
+```
+
+Resultado:
+
+```text
+18
+22
+25
+30
+```
+
+---
+
+Selecionando duas colunas:
+
+```python
+print(df[["idade", "salario"]])
+```
+
+Observe os dois colchetes.
+
+O primeiro acessa uma lista.
+
+O segundo acessa as colunas desejadas.
+
+---
+
+# 8. O que são Features?
+
+Features são as características usadas para ensinar o computador.
+
+Exemplo:
+
+| Idade | Salário | Comprou |
+| ----- | ------- | ------- |
+| 18    | 1500    | 0       |
+| 25    | 3000    | 1       |
+
+As features são:
 
 ```python
 idade
 salario
 ```
 
-y representa a resposta.
+São as informações que ajudam a fazer a previsão.
+
+---
+
+# 9. O que é Target?
+
+Target é a resposta correta.
+
+No exemplo:
 
 ```python
 comprou
 ```
 
+É aquilo que queremos prever.
+
 ---
 
-## Passo 3 – Criar o modelo
+# 10. Separando Features e Target
+
+```python
+X = df[["idade", "salario"]]
+```
+
+### X
+
+Por convenção representa as entradas.
+
+Visualmente:
+
+| idade | salario |
+| ----- | ------- |
+| 18    | 1500    |
+| 25    | 3000    |
+
+---
+
+```python
+y = df["comprou"]
+```
+
+### y
+
+Representa as respostas.
+
+```text
+0
+1
+1
+0
+```
+
+---
+
+# 11. Conhecendo o Scikit-Learn
+
+Scikit-Learn é a principal biblioteca de Machine Learning do Python.
+
+Ela possui algoritmos prontos.
+
+Entre eles:
+
+* Árvore de Decisão
+* Regressão Linear
+* KNN
+* Random Forest
+* SVM
+
+---
+
+# 12. Importando a Árvore de Decisão
 
 ```python
 from sklearn.tree import DecisionTreeClassifier
-
-modelo = DecisionTreeClassifier()
 ```
 
-### O que é isso?
+Vamos analisar.
 
-Estamos criando uma Árvore de Decisão.
+---
 
-Ela aprende fazendo perguntas:
+### from
+
+Significa:
 
 ```text
-Salário > 3000?
-      |
-      Sim
-      |
-Comprou
+Da biblioteca sklearn...
 ```
 
 ---
 
-## Passo 4 – Treinar
+### tree
+
+Módulo que contém árvores de decisão.
+
+---
+
+### import
+
+Importar algo específico.
+
+---
+
+### DecisionTreeClassifier
+
+Classe responsável por criar uma árvore de decisão.
+
+---
+
+# 13. Criando o Modelo
+
+```python
+modelo = DecisionTreeClassifier()
+```
+
+## O que acontece?
+
+Estamos construindo um "cérebro vazio".
+
+Ele ainda não sabe nada.
+
+Ainda não aprendeu.
+
+---
+
+# 14. Treinando o Modelo
 
 ```python
 modelo.fit(X, y)
 ```
 
-### Analogia
-
-Imagine um professor mostrando exercícios resolvidos para um aluno.
-
-O aluno estuda os exemplos.
-
-O método:
-
-```python
-fit()
-```
-
-faz exatamente isso.
+Esta é uma das linhas mais importantes do curso.
 
 ---
 
-## Passo 5 – Fazer previsão
+## O que significa fit?
+
+Em inglês:
+
+```text
+fit = ajustar
+```
+
+O algoritmo observa:
+
+```python
+X
+```
+
+e compara com:
+
+```python
+y
+```
+
+Tentando descobrir padrões.
+
+---
+
+### Analogia
+
+Imagine um professor corrigindo provas.
+
+Ele observa:
+
+* Resposta do aluno.
+* Gabarito.
+
+Após analisar centenas de provas ele entende o padrão.
+
+O fit() faz exatamente isso.
+
+---
+
+# 15. Fazendo Previsões
+
+Agora vamos perguntar algo novo ao modelo.
 
 ```python
 nova_pessoa = [[28, 3500]]
+```
 
+---
+
+Por que dois colchetes?
+
+Porque o Scikit-Learn espera receber uma tabela.
+
+Mesmo com apenas uma pessoa.
+
+Visualmente:
+
+| idade | salario |
+| ----- | ------- |
+| 28    | 3500    |
+
+---
+
+Realizando previsão:
+
+```python
 resultado = modelo.predict(nova_pessoa)
+```
 
+---
+
+## O que significa predict?
+
+```text
+predict = prever
+```
+
+O algoritmo analisa os padrões aprendidos e retorna uma resposta.
+
+---
+
+Mostrando resultado:
+
+```python
 print(resultado)
 ```
 
@@ -432,7 +538,7 @@ Saída:
 
 ---
 
-## Interpretando
+Interpretando:
 
 ```python
 if resultado[0] == 1:
@@ -443,42 +549,42 @@ else:
 
 ---
 
-# 9. Fluxo Completo do Machine Learning
+# 16. Código Completo Comentado
 
-```text
-Coleta dos Dados
-        ↓
-Limpeza dos Dados
-        ↓
-Treinamento
-        ↓
-Avaliação
-        ↓
-Previsão
-        ↓
-Melhoria do Modelo
+```python
+import pandas as pd
+
+from sklearn.tree import DecisionTreeClassifier
+
+dados = {
+    "idade": [18, 22, 25, 30, 35, 40],
+    "salario": [1500, 2500, 3000, 4500, 5000, 6000],
+    "comprou": [0, 0, 1, 1, 1, 1]
+}
+
+# Cria a tabela
+df = pd.DataFrame(dados)
+
+# Entradas
+X = df[["idade", "salario"]]
+
+# Saídas
+y = df["comprou"]
+
+# Cria o modelo
+modelo = DecisionTreeClassifier()
+
+# Treina o modelo
+modelo.fit(X, y)
+
+# Nova pessoa
+nova_pessoa = [[28, 3500]]
+
+# Faz previsão
+resultado = modelo.predict(nova_pessoa)
+
+print(resultado)
 ```
-
----
-
-# 10. Atividade Prática
-
-Crie um modelo para prever aprovação.
-
-Dados:
-
-| Horas Estudo | Aprovado |
-| ------------ | -------- |
-| 1            | 0        |
-| 2            | 0        |
-| 3            | 0        |
-| 4            | 1        |
-| 5            | 1        |
-| 6            | 1        |
-
-Pergunta:
-
-Uma pessoa que estudou 5 horas será aprovada?
 
 ---
 
@@ -494,96 +600,87 @@ Explique com suas palavras:
 
 ## Exercício 2
 
-Qual a diferença entre:
+Explique a diferença entre:
 
-* Programação tradicional
-* Machine Learning
+```python
+X
+```
+
+e
+
+```python
+y
+```
 
 ---
 
 ## Exercício 3
 
-Classifique:
+O que faz esta linha?
 
-a) Detecção de spam
-
-b) Recomendação de filmes
-
-c) Agrupamento de clientes
-
-Como:
-
-* Supervisionado
-* Não supervisionado
+```python
+import pandas as pd
+```
 
 ---
 
 ## Exercício 4
 
-Identifique:
-
-| Idade | Salário | Comprou |
-| ----- | ------- | ------- |
-| 25    | 3000    | Sim     |
-
-Quais são:
-
-* Features?
-* Target?
+O que é um DataFrame?
 
 ---
 
 ## Exercício 5
 
-Complete:
+Explique:
 
 ```python
-from sklearn.tree import __________
-
-modelo = __________()
-
 modelo.fit(X, y)
 ```
 
 ---
 
-# Desafio da Aula
+## Desafio
 
-Crie um modelo para prever se um aluno será aprovado utilizando:
+Altere os dados para prever:
 
-* Nota 1
-* Nota 2
+| Horas Estudo | Aprovado |
+| ------------ | -------- |
+| 1            | 0        |
+| 2            | 0        |
+| 3            | 0        |
+| 4            | 1        |
+| 5            | 1        |
+| 6            | 1        |
 
-Como entrada.
+Crie um modelo que responda:
 
-E:
-
-* Aprovado (0 ou 1)
-
-Como saída.
+**Um aluno que estudou 5 horas será aprovado?**
 
 ---
 
-# Resumo
+# Resumo da Aula
 
 Nesta aula aprendemos:
 
 ✅ O que é Machine Learning
 
-✅ Diferença entre programação e ML
+✅ O que é um Dataset
 
-✅ Tipos de aprendizado
+✅ O que é o Pandas
 
-✅ Dataset, Features e Target
+✅ O que é um DataFrame
 
-✅ Biblioteca Scikit-Learn
+✅ Como importar bibliotecas
 
-✅ Árvore de Decisão
+✅ O que são Features (X)
 
-✅ Método `fit()`
+✅ O que é o Target (y)
 
-✅ Método `predict()`
+✅ Como funciona o `fit()`
 
-✅ Primeiro modelo de Machine Learning
+✅ Como funciona o `predict()`
 
-Na próxima aula, o foco será **NumPy e Pandas para preparação de dados**, etapa essencial para qualquer projeto de Machine Learning.
+✅ Como criar o primeiro modelo de Machine Learning
+
+Na próxima aula, você pode aprofundar em **NumPy e manipulação de dados com Pandas**, preparando conjuntos de dados reais para treinar modelos mais inteligentes.
